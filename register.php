@@ -3,15 +3,36 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="fonts/css/all.min.css">
 	</head>
 	
 	<body>
 		
+		<nav class="navbar navbar-expand-lg navbar-dark bg-info">
+		  <a class="navbar-brand" href="#"><img src="images/default_logo.png" width="60"  class="d-inline-block align-top img-fluid" alt=""></a>
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		  </button>
+
+		  <div class="collapse navbar-collapse" id="navbar">
+			<ul class="navbar-nav">
+			  <li class="nav-item ">
+				<a class="nav-link d-block" href="#">Home <i class="fas fa-home"></i></a>
+			  </li>
+			  <li class="nav-item active">
+				<a class="nav-link" href="#">Registeration <i class="fas fa-sign-in-alt"></i> <span class="sr-only">(current)</span></a>
+			  </li>
+			</ul>
+		  </div>
+		</nav>
+		
+		<?php require_once('php/signup.php');?>
+
 		<section class="container ">
 			<h1> Registeration </h1>
 			<span class="h6 form-text text-muted">Your information is private</span>
 			
-			<?php require_once('signup.php');?>
+			
 			<form class="needs-validation "novalidate="" id="register-form" action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?> method="post">
 				
 				<div class="form-group">
@@ -34,7 +55,12 @@
 					<label class="form-control-label" for="email">Your Email</label>
 					<input class="form-control <?php if($errors['email']) echo "is-invalid"; else if(isset($inputs['email'])) echo "is-valid";  ?>" id="email" type="text" name="email" placeholder="name@domain-name.com" pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" title="Your email must be like that name@domain-name.com" value="<?php if(isset($inputs['email'])) echo $email; ?>" autocomplete="on" required>
 					<div class="invalid-feedback">
-						Your email must be like that name@domain-name.com
+						<?php 
+							if(!isset($error_message['email']) || $error_message['email']==="") 
+								echo "Your email must be like that name@domain-name.com";
+							else
+								echo $error_message['email'] ?>
+						
 					</div>
 				</div>
 				
@@ -52,6 +78,7 @@
 							<label class="form-control-label">Your Country</label>
 							<select name="country" class="custom-select countryId <?php if($errors['country']) echo "is-invalid"; else if(isset($inputs['country'])) echo "is-valid";  ?>" id="countryId" required>
 								<option value="">Select Country</option>
+								<option value="1">Egypt</option>
 							</select>
 							<div class="invalid-feedback">
 								Choose your country
@@ -62,6 +89,7 @@
 							<label class="form-control-label">Your State</label>
 							<select name="state" class="custom-select stateId <?php if($errors['state']) echo "is-invalid"; else if(isset($inputs['state'])) echo "is-valid";  ?>" id="stateId" required>
 								<option value="">Select State</option>
+								<option value="1">Egypt</option>
 							</select>
 							<div class="invalid-feedback">
 								Choose your state
@@ -72,6 +100,7 @@
 							<label class="form-control-label">Your City</label>
 							<select name="city" class="custom-select cityId <?php if($errors['city']) echo "is-invalid"; else if(isset($inputs['city'])) echo "is-valid";  ?>" id="cityId" required>
 								<option value="">Select City</option>
+								<option value="1">Egypt</option>
 							</select>
 							<div class="invalid-feedback">
 								Choose your city
@@ -108,7 +137,7 @@
 					
 				<div class="form-group">
 					<label class="form-control-label" for="password">Your Password</label>
-					<input class="form-control <?php if($errors['password']) echo "is-invalid"; else if(isset($inputs['password'])) echo "is-valid";  ?>" id="password" type="password" name="password" placeholder="at least 8 characters" pattern="^.{8,}$" title="Your password must be 8 caharacters at least" autocomplete="on" required>
+					<input class="form-control <?php if($errors['password']) echo "is-invalid"; ?>" id="password" type="password" name="password" placeholder="at least 8 characters" pattern="^.{8,}$" title="Your password must be 8 caharacters at least" autocomplete="on" required>
 					<div class="invalid-feedback">
 						Your password must be 8 caharacters at least
 					</div>
@@ -116,7 +145,7 @@
 				
 				<div class="form-group">
 					<label class="form-control-label" for="confirm-password">Confirm Password</label>
-					<input class="form-control <?php if($errors['confirm-password']) echo "is-invalid"; else if(isset($inputs['confirm-password'])) echo "is-valid";  ?>" id="confirm-password" type="password" name="confirm-password" placeholder="the same as password" pattern="^.{8,}$" title="confirm password must match the password" autocomplete="on" required>
+					<input class="form-control <?php if($errors['confirm']) echo "is-invalid";  ?>" id="confirm-password" type="password" name="confirm-password" placeholder="the same as password" pattern="^.{8,}$" title="confirm password must match the password" autocomplete="on" required>
 					<div class="invalid-feedback">
 						confirm password must match the password.
 					</div>
@@ -134,17 +163,15 @@
 				</div>
 				
 				<div class="form-group text-right">
-					<input class="btn btn-primary" type="submit" value="Register" title="Can't Register" data-content="you should match all validation first" disabled>
+					<input class="btn btn-primary" type="submit" value="Register" title="Can't Register" data-content="you should match all validation first" >
 				</div>
 								
 			</form>
 			
 		</section>
-		
+
 		<script src="js/jquery-3.5.1.min.js" ></script>
 		<script src="js/popper.min.js" ></script>
 		<script src="js/bootstrap.min.js" ></script>
-		<script src="js/script.js" ></script>
-		
 	</body>
 </html>
