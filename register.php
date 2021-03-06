@@ -163,7 +163,7 @@
 				</div>
 				
 				<div class="form-group text-right">
-					<input class="btn btn-primary" type="submit" value="Register" title="Can't Register" data-content="you should match all validation first" >
+					<input class="btn btn-primary" type="submit" value="Register" title="Can't Register" data-content="you should match all validation first" disabled>
 				</div>
 								
 			</form>
@@ -173,5 +173,6 @@
 		<script src="js/jquery-3.5.1.min.js" ></script>
 		<script src="js/popper.min.js" ></script>
 		<script src="js/bootstrap.min.js" ></script>
+		<script src="js/script.js" ></script>
 	</body>
 </html>
